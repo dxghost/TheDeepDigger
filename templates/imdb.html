@@ -1,0 +1,81 @@
+<html>
+    <style>
+        body{
+            font-family: sans-serif;
+        }
+        
+        .header {
+            background-color: rgb(51, 51, 51);
+            padding: -40px;
+            width: 80%;
+            margin-left: 135px;
+            margin-top: -10px;
+            box-shadow: 0px 0px 3px 2px #aaaaaa;
+            height: 700px;
+
+        }
+        .logo {
+            display: inline-block;
+            background-color: rgb(245, 197, 24);
+            color: black;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 40px;
+            margin-left: 60px;
+            padding-left: 20px;
+            padding-right: 20px;
+            margin-bottom: 39px;
+            border-radius: 5px 5px 5px 5px;"
+        }
+        .logo:hover {
+            cursor: pointer;
+        }
+        .image {
+            margin-left: 60px;
+            margin-top: 40px;
+        }
+        ul {
+            color: rgb(245, 197, 24);
+            list-style-type: none;
+        }
+        ul li {
+            padding-top: 23px;
+        }
+        .refrence {
+            margin-left: 1220px;
+            margin-top: 200px;
+            display: inline-block;
+            color:black;
+            background-color: rgb(245, 197, 24);
+            padding-left: 40px;
+            padding-right: 40px;
+            padding: 10px;
+            border-radius: 15px 15px 15px 15px;
+            text-decoration: none;
+        }
+    </style>
+    <body>
+        <div class="header">
+            
+            <p class="logo">IMDb</p>
+            <p style="display: inline-block; font-size: 40px;color: white; margin-left: 60px;">|</p>
+            <p style="display:inline; color:rgb(245, 197, 24) ;">  Find Movies, TV shows, Celebrities and more...</p>
+            <hr style="color: black;">
+            <img class="image" src="{{ result_data[-1] }}" width="180px" height="245px" alt='Not Found' onerror=this.src="https://www.iconsdb.com/icons/preview/black/film-2-xxl.png">
+            <p style="margin-left: 60px;color: white;font-size: 18px;">Story:</p>
+            <p style="margin-left: 60px; color:white;word-break: keep-all; margin-right: 50px;">
+                {{ result_data[3] }}
+            </p>
+        </div>
+        <ul style="margin-left: 350px; margin-top:-539px;word-break: break-all ">
+                <li>Name: {{ result_data[1] }} </li>
+                <li>Languages: {{ result_data[-4] }}</li>
+                <li>Stars: {{ result_data[2] }}</li>
+                <li>Genre: {{ result_data[4] }}</li>
+                <li>Release Dates: {{ result_data[-3] }}</li>
+                <li>Country: {{ result_data[-5] }} </li>
+        </ul>
+    
+        <a class="refrence" href="{{ result_data[-2] }}">Proceed</a>
+        
+    </body>
+</html>

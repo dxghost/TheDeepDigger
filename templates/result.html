@@ -1,0 +1,200 @@
+<html>
+    <style>
+        .tophead {
+                padding: 25px;
+                background-color:#f1f1f1;
+                margin-top: -10px;
+                margin-left: -20px;
+                width: 100%;
+                font-family: sans-serif;
+                display: block;
+                position: relative;
+                box-shadow: 0px 0px 5px #aaaaaa;
+                position: fixed;
+                top: 0px;
+                height: 86px;
+            }
+        form{
+            
+            margin-left: 130px;
+            margin-top: -54px;
+            box-align: center;
+            align-content: center;
+            align-items: center;
+        }
+        input[type=text]{
+            width: 80%;
+            padding: 10px;
+            border:none;
+            outline-width: 0;
+            font-size: 18px;
+            font-family: sans-serif;
+            border-radius: 20px 0 0 20px;
+            box-shadow: 0px 0px 5px #aaaaaa;
+            
+        }
+        input[type=submit]{
+            padding:10px;
+            border: none;
+            font-size: 18px;
+            outline-width: 0;
+            font-family: sans-serif;
+            background-color: orange;
+            color: white;
+            border-radius: 0 20px 20px 0;
+            cursor: pointer;
+            box-shadow: 0px 0px 5px #aaaaaa;
+        }
+        .tophead2:hover{
+            border-radius: 20px 20px 20px 20px;
+            font-size: 16px;
+            padding: 10px;
+            background-color:orange;
+            margin-left: 10px;
+            color: white;
+            display: inline-block;
+            box-shadow: 0px 0px 5px #aaaaaa; 
+            cursor: pointer;
+        }
+        .tophead2{
+            text-decoration: none;
+            color: black;
+            border-radius: 20px 20px 20px 20px; 
+            font-size: 16px;
+            padding: 10px;
+            margin-left: 10px;
+            background-color: rgb(255, 255, 255);
+            display: inline-block;
+            box-shadow: 0px 0px 5px #aaaaaa; 
+        }
+        ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            margin-left: 107px;
+            margin-top: 1px;
+            margin-bottom: -26px;
+            overflow: hidden;
+            
+        }
+        li {
+            float: left;
+            
+        }
+        li a {
+            display: block;
+            padding: 10px;
+            color: #aaaaaa;
+            margin-left: 20px;
+        }
+        
+        li a:hover{
+            background-color: orange;
+            border-radius: 5px 5px 0px 0px;
+            color: white;
+            cursor: pointer;
+            
+        }
+        .result{
+            margin-left: 137px;
+            margin-top: 30px;
+
+        }
+        .result_0 {
+            font-family: sans-serif;
+            font-size: 19px;
+            color: rgb(19, 66, 142);
+            text-decoration: none;
+            cursor: pointer;
+            display: inline-block;
+        }
+        .result_0:hover{
+            text-decoration: underline;
+        }
+        .result_1 {
+            font-family: sans-serif;
+            font-size: 16px;
+            margin-top: -9px;
+            color: rgb(0, 153, 51);
+        } 
+        .result_2 {
+            font-family: sans-serif;
+            font-size: 15px;
+            margin-top: -9px;
+            margin-right: 30%;
+        }
+        .not_result{
+            font-family: sans-serif;
+            display: block;
+            margin-left: 40px;
+            font-size: 15px;
+        }
+        .numresult{
+            display: inline-block;
+            float: right;
+            margin-top: 2px;
+            margin-right: 197px;
+            color: #aaaaaa;
+        }
+    </style>
+    <body>
+        <div class="tophead">
+                <p><a href="/" class="tophead2">JM Search</a></p>
+            <form action="/result" method="POST">
+                    <input type="text" name="search" value='{{ name }}' >
+                    <input type="submit" value="Search">
+            </form>
+            <ul>
+                <li><a href="/result"  style="text-decoration: none;">All</a></li>
+                <li><a href="/imagesearch" style="text-decoration: none;">Image</a></li>
+            </ul>
+            <p class="numresult">{{ number }} result found in {{ timer }} second</p>     
+
+        </div>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        
+        {% if not has_result %}
+            <div class="result">
+                <p 
+                style="font-family:sans-serif;">
+                There was no result for your search <b>{{ name }}</b>.</p>
+                <p  style="font-family:sans-serif;font-size: 14px;">Suggestions:</p>
+                <div class="not_result">
+                    <p style="margin-bottom: -10px;">1.See if you have written the spelling properly.</p>
+                    <p style="margin-bottom: -10px;">2.Try different keywords.</p>
+                    <p style="margin-bottom: -10px;">3.Please try more general keywords.</p>
+                </div>
+            </div>
+        {% else %}
+        {% endif %}
+        {% if result|length > 0 %}    
+            {% for i in result %}
+                
+                <div class="result">
+                        <p class="result_0"><a class="result_0" href="/preview/{{ i[0] }}">{{ i[1] }}</a></p>
+                        <p class="result_1">{{ i[-2] }}</p>
+                        <p class="result_2"><a>{{ i[3] }}</a></p>
+                </div>
+            {% endfor %}
+                
+        {% else %}
+        
+            <div class="result">
+                <p 
+                style="font-family:sans-serif;">
+                There was no result for your search <b>{{ name }}</b>.</p>
+                <p  style="font-family:sans-serif;font-size: 14px;">Suggestions:</p>
+                <div class="not_result">
+                    <p style="margin-bottom: -10px;">1.See if you have written the spelling properly.</p>
+                    <p style="margin-bottom: -10px;">2.Try different keywords.</p>
+                    <p style="margin-bottom: -10px;">3.Please try more general keywords.</p>
+                </div>
+            </div>
+        {% endif %}       
+    </body>
+</html>
